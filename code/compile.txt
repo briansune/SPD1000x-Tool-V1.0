@@ -1,0 +1,4 @@
+pyuic5 -o spd1000x_gui.py ui/spd1000x_gui.ui
+
+
+pyrcc5 -o ui_res_rc.py ui/ui_res.qrc
