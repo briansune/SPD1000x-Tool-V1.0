@@ -1,0 +1,7 @@
+<RCC>
+  <qresource prefix="image">
+    <file>green.png</file>
+    <file>red.png</file>
+    <file>spd_icon.png</file>
+  </qresource>
+</RCC>
