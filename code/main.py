@@ -66,9 +66,13 @@ class Window(QMainWindow, Ui_oMainWind):
             self.ui.oComboDev.addItem('192.168.1.214')
             self.o_socket = _spd.SPD1000()
 
+    def closeEvent(self, event):
+        if self.bConFlag:
+            self.controlLinkUnlink()
+
     def connectSignalsSlots(self):
         self.ui.oActAbout.triggered.connect(self.about)
-        self.ui.oActExit.triggered.connect(self.close)
+        self.ui.oActExit.triggered.connect(self.closeAct)
         self.ui.oButVoltSel.clicked.connect(self.setVoltInSel)
         self.ui.oButCurrSel.clicked.connect(self.setCurrInSel)
         self.ui.oDialVolt.sliderReleased.connect(self.setVoltInVar)
@@ -80,6 +84,11 @@ class Window(QMainWindow, Ui_oMainWind):
         self.ui.oButLock.clicked.connect(self.controlLock)
         self.ui.oRbut2Wire.clicked.connect(self.control2Wire)
         self.ui.oRbut4Wire.clicked.connect(self.control4Wire)
+
+    def closeAct(self):
+        if self.bConFlag:
+            self.controlLinkUnlink()
+        self.close()
 
     def updateOutput(self):
         if self.o_socket.spd_output:
@@ -162,7 +171,7 @@ class Window(QMainWindow, Ui_oMainWind):
             else:
                 s_re = ''
 
-            o_re = re.search(r'Siglent[\W]+Technologies,([SPD13][\w]+)', s_re)
+            o_re = re.search(r'Siglent[\W]+Technologies,([SPD13][\w]+)', str(s_re))
             if o_re:
                 print(o_re.group(1))
                 self.bConFlag = not self.bConFlag
@@ -212,8 +221,8 @@ class Window(QMainWindow, Ui_oMainWind):
         self.ui.oLcdCurrIn1.display(self.lCurrVar[1])
         self.ui.oLcdCurrIn2.display(self.lCurrVar[2])
         self.o_socket.spdSetup(
-            b'CH1:CURR {}.{}{}'.format(
-                self.lCurrVar[0], self.lCurrVar[1], self.lCurrVar[2]))
+            'CH1:CURR {}.{}{}'.format(
+                self.lCurrVar[0], self.lCurrVar[1], self.lCurrVar[2]).encode('utf-8'))
 
     def setVoltInSel(self):
         self.lVoltSel.insert(0, self.lVoltSel.pop())
@@ -239,9 +248,9 @@ class Window(QMainWindow, Ui_oMainWind):
         self.ui.oLcdVoltIn2.display(self.lVoltVar[2])
         self.ui.oLcdVoltIn3.display(self.lVoltVar[3])
         self.o_socket.spdSetup(
-            b'CH1:VOLT {}{}.{}{}'.format(
+            'CH1:VOLT {}{}.{}{}'.format(
                 self.lVoltVar[0], self.lVoltVar[1],
-                self.lVoltVar[2], self.lVoltVar[3]))
+                self.lVoltVar[2], self.lVoltVar[3]).encode('utf-8'))
 
     @staticmethod
     def about():
