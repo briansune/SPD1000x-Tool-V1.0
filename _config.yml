@@ -1,5 +1,3 @@
 theme: jekyll-theme-slate
 
-{% if theme.google_site_verification %}
-    <meta name="google-site-verification" content="6_hYk6JyfymFsu2RIJFrCO5fTzuG157Qytpa9GzhKS8" />
-{% endif %}
+google_site_verification: 6_hYk6JyfymFsu2RIJFrCO5fTzuG157Qytpa9GzhKS8
