@@ -1,0 +1,9 @@
+<RCC>
+  <qresource prefix="image">
+    <file>unlock.png</file>
+    <file>lock.png</file>
+    <file>green.png</file>
+    <file>red.png</file>
+    <file>spd_icon.ico</file>
+  </qresource>
+</RCC>

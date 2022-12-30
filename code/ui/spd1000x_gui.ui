@@ -14,8 +14,8 @@
    <string>SPD1xxxx Power Supply Tool V1.0</string>
   </property>
   <property name="windowIcon">
-   <iconset resource="ui_res.qrc">
-    <normaloff>:/image/spd_icon.png</normaloff>:/image/spd_icon.png</iconset>
+   <iconset>
+    <normaloff>spd_icon.ico</normaloff>spd_icon.ico</iconset>
   </property>
   <property name="styleSheet">
    <string notr="true">background-color: rgb(255, 255, 255);</string>
